@@ -3,32 +3,20 @@ pipeline {
 
     tools {
         jdk 'JDK'
-        maven 'maven'
+        gradle 'gradle'   // 👈 use gradle instead of maven
     }
 
     stages {
 
         stage('Build') {
             steps {
-                dir('mavenapp') {   // 👈 FIX HERE
-                    sh 'mvn clean compile'
-                }
+                sh 'gradle clean build'
             }
         }
 
-        stage('Test') {
+        stage('Run') {
             steps {
-                dir('mavenapp') {
-                    sh 'mvn test'
-                }
-            }
-        }
-
-        stage('Package') {
-            steps {
-                dir('mavenapp') {
-                    sh 'mvn package'
-                }
+                sh 'gradle run'
             }
         }
     }
