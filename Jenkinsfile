@@ -10,19 +10,25 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh 'mvn clean compile'
+                dir('mavenapp') {   // 👈 FIX HERE
+                    sh 'mvn clean compile'
+                }
             }
         }
 
         stage('Test') {
             steps {
-                sh 'mvn test'
+                dir('mavenapp') {
+                    sh 'mvn test'
+                }
             }
         }
 
         stage('Package') {
             steps {
-                sh 'mvn package'
+                dir('mavenapp') {
+                    sh 'mvn package'
+                }
             }
         }
     }
